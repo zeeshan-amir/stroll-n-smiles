@@ -1,0 +1,11 @@
+$('div.admin-error').html('');
+$('div.admin-error').css('display', 'none');
+
+<% if @admin.errors.any? %>
+  $('div.admin-error').html('<%= @admin.errors.full_messages.first %>');
+  $('div.admin-error').css('display', 'block');
+
+<% else %>
+  $('#new-admin-modal').modal('hide');
+  location.reload();
+<% end %>

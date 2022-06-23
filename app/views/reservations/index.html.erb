@@ -1,0 +1,46 @@
+<%= render "shared/users_navbar" %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">My Reservations</div>
+      <div class="panel-body">
+
+        <% if @reservations.empty? %>
+          <div>You have no reservations.</div>
+        <% end %>
+
+        <% @reservations.each do |reservation| %>
+          <div class="row">
+            <div class="col-md-2">
+              <%= reservation.datetime.strftime('%v') %>
+              <%= reservation.datetime.strftime('%R') %>
+              <p><%= reservation.status %></p>
+            </div>
+            <div class="col-md-2">
+              <%= link_to room_path(reservation.room) do %>
+                <%= image_tag reservation.room.cover_photo(:thumb) %>
+              <% end %>
+            </div>
+            <div class="col-md-5">
+              <%= link_to reservation.room.name, room_path(reservation.room) %><br/><br/>
+              <span>
+                <%= image_tag avatar_url(reservation.room.user), class: "img-circle avatar-small" %>
+                <%= link_to reservation.room.user.fullname, user_path(reservation.room.user) %>
+
+                <% if current_user.id != reservation.room.user_id %>
+                (<%= link_to "send message", conversations_path(sender_id: current_user.id, recipient_id: reservation.room.user_id),
+                            method: :post %>)
+                <% end %>
+              </span>
+            </div>
+            <div class="col-md-3 text-right">
+              <%= render "reviews/guest_form", reservation: reservation if reservation.approved? %>
+            </div>
+          </div>
+          <hr/>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

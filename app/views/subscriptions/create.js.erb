@@ -1,0 +1,11 @@
+$('div.subscription-error').html('');
+$('div.subscription-error').css('display', 'none');
+
+<% if @subscription.errors.any? %>
+  $('div.subscription-error').html('<%= @subscription.errors.full_messages.first %>');
+  $('div.subscription-error').css('display', 'block');
+$('#subscription-submit').prop('disabled', false);
+<% else %>
+  $('#subscription-modal').modal('hide');
+  location.reload();
+<% end %>

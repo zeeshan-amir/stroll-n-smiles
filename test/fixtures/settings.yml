@@ -1,0 +1,19 @@
+luke:
+  user: luke
+  enable_email: true
+  enable_sms: true
+
+han:
+  user: han
+  enable_email: true
+  enable_sms: true
+
+palpatine:
+  user: palpatine
+  enable_email: true
+  enable_sms: true
+
+rey:
+  user: rey
+  enable_email: false
+  enable_sms: false

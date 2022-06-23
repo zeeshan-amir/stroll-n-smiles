@@ -1,0 +1,15 @@
+rescue_leia:
+  datetime: "1977-05-25 09:00:00"
+  price: 0
+  total: 0
+  user: han
+  room: garbage_compactor
+
+<% 24.times do |time| %>
+find_luke_<%= time %>:
+  datetime: "2015-12-17 <%= "%02d" % time %>:00:00"
+  price: 0
+  total: 0
+  user: rey
+  room: first_jedi_temple
+<% end %>

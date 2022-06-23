@@ -1,0 +1,39 @@
+luke:
+  email: "luke@strollnsmile.com"
+  encrypted_password:  <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Luke Skywalker"
+  confirmed_at: <%= Time.now %>
+
+leia:
+  email: "leia@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Leia Skywalker"
+
+anakin:
+  email: "vader@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Anakin Skywalker"
+
+han:
+  email: "han@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Han Solo"
+  confirmed_at: <%= Time.now %>
+
+yoda:
+  email: "yoda@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Yoda"
+
+palpatine:
+  email: "theemperor@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Sheev Palpatine"
+  phone_verified: true
+
+rey:
+  email: "rey@strollnsmile.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  fullname: "Rey Palpatine"
+  pin: "15DBY"
+  confirmed_at: <%= Time.now %>

@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span><i class="fa fa-bolt" style="color: #ffb400"></i> $<%= @room.price %></span>
+    <span class="pull-right">Appointment</span>
+  </div>
+  <div class="panel-body">
+    <%= form_for(
+          [@room, @room.reservations.new],
+          html: { "data-behavior": "room-reservation-form", "data-available": @room.available_reservation_times.present? }
+        ) do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label "Date" %>
+            <%= f.text_field :datetime,
+              readonly: true,
+              placeholder: "Pick date",
+              value: @room.date.strftime("%d-%m-%Y"),
+              "data-behavior": "room-reservation-date",
+              "data-url": availability_room_path(@room),
+              class: "form-control datepicker" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group select">
+            <label>Time</label>
+            <select name="reservation[time]" data-behavior="room-reservation-time">
+              <%= options_for_select(@room.available_reservation_times) %>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit "Book Now", id: "btn_book", class: "room__book-button" %>
+    <% end %>
+  </div>
+</div>

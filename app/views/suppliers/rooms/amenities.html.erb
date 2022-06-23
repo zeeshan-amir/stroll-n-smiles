@@ -1,0 +1,67 @@
+<%= render "shared/suppliers_navbar" %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'room_menu' %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">Services</div>
+
+      <div class="panel-body">
+        <div class="container">
+
+          <%= form_for @room do |f| %>
+            <div class="row form-group">
+              <div class="col-md-3">
+                <%= f.check_box :has_lobby %><%= f.label :has_lobby %>
+              </div>
+              <div class="col-md-3">
+                <%= f.check_box :has_xrays %><%= f.label :has_xrays %>
+              </div>
+              <div class="col-md-3">
+                <%= f.check_box :has_heating %><%= f.label :has_heating %>
+              </div>
+              <div class="col-md-3">
+                <%= f.check_box :has_internet %><%= f.label :has_internet %>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-4">
+                <%= f.label :practitioners %>
+                <%= f.number_field :practitioners, class: "form-control" %>
+              </div>
+              <div class="col-md-4">
+                <%= f.label :stations %>
+                <%= f.number_field :stations, class: "form-control" %>
+              </div>
+              <div class="col-md-4">
+                <%= f.label :appointment_duration %>
+                <div>
+                  <%= f.time_select :appointment_duration, {},
+                    { class: "form-control", style: "width: 45%; display: inline-block;" } %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-12">
+                <%= f.label :available_procedures %>
+                <%= f.text_area :available_procedures, class: "form-control", rows: 5,
+                    placeholder: "List all procedures available at your clinic." %>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <%= f.submit "Save", class: "btn btn-form" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

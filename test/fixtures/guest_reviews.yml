@@ -1,0 +1,17 @@
+no_space:
+  comment: "To tight, you literally feel the room shrinking!"
+  star: 2
+  room: garbage_compactor
+  reservation: rescue_leia
+  guest: han
+  host: palpatine
+  type: "GuestReview"
+
+uninvited_guests:
+  comment: "The previous guest was still inside at our arrival."
+  star: 4
+  room: garbage_compactor
+  reservation: rescue_leia
+  guest: luke
+  host: palpatine
+  type: "GuestReview"

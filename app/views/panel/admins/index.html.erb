@@ -1,0 +1,46 @@
+<% provide(:title, "Administrators") %>
+
+<div id="messages">
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message.html_safe %></div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <% @admins.each do |admin| %>
+      <div class="row admin-row">
+        <div class="col-md-6">
+          <span class="admin-text-box"><%= admin.email %></span>
+        </div>
+        <div class="col-md-6">
+          <%= link_to panel_admin_path(admin), class: "pull-right",
+              data: { confirm: 'Esta acción no se puede deshacer, ¿está seguro?' },
+              method: :delete do %>
+            <i class="fa fa-trash admin-text-box"></i>
+          <% end %>
+
+          <% if current_admin.email == admin.email %>
+            <%= link_to edit_panel_admin_path(admin), class: "pull-right", remote: true do %>
+              <i class="fa fa-pencil admin-text-box"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div>
+      <%= link_to "Add administrator", new_panel_admin_path, class: "pull-right", remote: true %>
+    </div>
+  </div>
+</div>
+
+<div id="new-admin-modal" tabindex="-1" role="dialog" class="modal fade"></div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    setTimeout(function() {
+      $('#messages').animate({ height: 0, opacity: 0 }, 'slow');
+    }, 3500);
+  });
+</script>

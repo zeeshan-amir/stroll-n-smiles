@@ -1,0 +1,44 @@
+<footer class="navbar-default footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Get Started</h4>
+        <ul>
+          <li><%= link_to "Book an appointment", search_path(search: "Quito, Ecuador") %></li>
+          <li><%= link_to "Increase your clinic's revenue", subscriptions_path %></li>
+        </ul>
+      </div>
+      <div class="col-xs-4">
+        <h4>Learn More</h4>
+        <ul>
+          <li><%= link_to "Why StrollnSmile?", why_path %></li>
+          <li><%= link_to "How it works?", how_it_works_path %></li>
+          <li><%= link_to "Pricing", subscriptions_path %></li>
+        </ul>
+      </div>
+      <div class="col-xs-4">
+        <i class="fa fa-instagram icon-link fa-2x" aria-hidden="true" data-url="https://www.instagram.com/strollnsmile/"></i>
+        <i class="fa fa-facebook icon-link fa-2x" aria-hidden="true" data-url="https://www.facebook.com/strollnsmile/"></i>
+        <i class="fa fa-twitter icon-link fa-2x" aria-hidden="true" data-url="https://twitter.com/strollnsmile"></i>
+        <p><%= link_to "Frequently Asked Questions", faq_path  %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="list-inline">
+          <li class="copyright"><i class="fa fa-copyright"></i> StrollnSmile 2020</li>
+          <li><%= link_to "About", why_path %></li>
+          <li><%= link_to "Contact", "mailto:strollnsmile@gmail.com" %></li>
+          <li><%= link_to "Privacy", privacy_path %></li>
+          <li><%= link_to "Terms", terms_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+$('.icon-link').on('click', function() {
+  window.open($(this).attr("data-url"))
+});
+</script>

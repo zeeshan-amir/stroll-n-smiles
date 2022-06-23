@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  db:
+    container_name: pg_sns
+    image: postgres:10
+    env_file:
+      - database.env
+    environment:
+      - TZ=America/Mexico_City
+    ports:
+      - 5433:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    container_name: sns
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    env_file:
+      - database.env
+      - application.env
+    environment:
+      - TZ=America/Mexico_City
+    depends_on:
+      - db
+    ports:
+      - 3005:3000
+    volumes:
+      - ..:/sns
+
+volumes:
+  db-data:

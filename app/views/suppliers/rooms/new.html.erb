@@ -1,0 +1,126 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Create your beautiful Clinic
+  </div>
+  <div class="panel-body">
+    <div class="container">
+
+      <%= form_for @room do |f| %>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <%= f.label :address %>
+              <%= f.text_field :address, class: "form-control", "data-behavior": "geocomplete",
+                  placeholder: "Type your location" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :summary %>
+              <%= f.text_area :summary, class: "form-control", rows: 5,
+                  placeholder: "Describe your clinic, add any information you will like to share with your clients." %>
+           </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :available_procedures %>
+              <%= f.text_area :available_procedures, class: "form-control", rows: 5,
+                  placeholder: "List all procedures available at your clinic." %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group select">
+              <%= f.label :has_lobby %>
+              <%= f.select :has_lobby, availability_options, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group select">
+              <%= f.label :has_xrays %>
+              <%= f.select :has_xrays, availability_options, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group select">
+              <%= f.label :has_heating %>
+              <%= f.select :has_heating, availability_options, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group select">
+              <%= f.label :has_internet %>
+              <%= f.select :has_internet, availability_options, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <%= f.label :price %>
+              <%= f.number_field :price, class: "form-control", step: 0.1 %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <%= f.label :practitioners %>
+              <%= f.number_field :practitioners, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <%= f.label :stations %>
+              <%= f.number_field :stations, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <%= f.label :appointment_duration %>
+              <div>
+                <%= f.time_select :appointment_duration, {},
+                  { class: "form-control", style: "width: 45%; display: inline-block;" } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label :payment_methods %>
+              <%= f.select :payment_methods, Room::ACCEPTED_PAYMENT_METHODS,
+                { class: "form-control", include_hidden: false }, { multiple: true, size: 5 } %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :open_hours %>
+              <%= f.text_area :open_hours, class: "form-control", rows: 5,
+                              placeholder: "Provide a summary for open hours, including open/close days." %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <%= f.submit "Create My Clinic", class: "btn btn-normal" %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

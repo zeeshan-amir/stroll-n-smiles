@@ -1,0 +1,66 @@
+<% provide(:title, "Featured Clinics") %>
+<% @rooms.each do |room| %>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading preview">
+        <%= image_tag room.cover_photo(:medium) %>
+      </div>
+      <div class="panel-body">
+        <div class="pull-right admin-order-box">
+          <%= number_field_tag "order-#{room.id}", room.featured_order,
+            "data-id": room.id, class: "admin-big-input", disabled: true %>
+          <br />
+          <%= button_tag "data-id": room.id, class: "admin-small-btn edit-order" do %>
+            <i class="fa fa-pencil"></i>
+          <% end %>
+          <%= button_tag "data-id": room.id, class: "admin-small-btn btn-success update-order" do %>
+            <i class="fa fa-check"></i>
+          <% end %>
+        </div>
+        <%= link_to room.name, room %><br/>
+        $<%= room.price %>
+        <div id="star_<%= room.id %>"></div> <%= pluralize(room.guest_reviews.count, "review") %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#star_<%= room.id %>').raty({
+      path: '/images',
+      readOnly: true,
+      score: <%= room.average_rating %>
+    });
+  </script>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+
+    $('.edit-order').on('click', function() {
+      $('#order-' + $(this).attr('data-id')).prop('disabled', (_, val) => !val);
+    });
+
+    $('.update-order').on('click', function() {
+      var room_id = $(this).attr('data-id');
+      var values = {}
+
+      values['clinic[featured_order]'] = $('#order-' + room_id).val();
+
+      $.ajax({
+        type: "PUT",
+        url: "/panel/clinics/" + room_id,
+        data: values,
+        success: function(json) {
+          if(json.error) {
+            console.log(json.error);
+          } else {
+            $('#order-' + room_id).prop('disabled', true);
+            console.log("Success");
+          }
+
+          location.reload();
+        }
+      });
+    });
+  });
+</script>

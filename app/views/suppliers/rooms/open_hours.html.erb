@@ -1,0 +1,120 @@
+<%= render "shared/suppliers_navbar" %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'room_menu' %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        Open Hours
+      </div>
+
+      <div class="panel-body">
+        <div class="container">
+          <div class="open-hours"
+               data-behavior="open-hours-week"
+               data-url="<%= open_hours_week_days_path %>"
+               data-room-id="<%= @room.id %>">
+
+            <h4 class="open-hours__title">Week days</h4>
+            <table class="open-hours__table">
+              <tbody>
+                <% @room.open_hours_by_week_day.each do |day, open_hours| %>
+                  <tr data-behavior="open-hours-day">
+                    <td><span class="open-hours-day"><%= day.capitalize %></span></td>
+                    <td><span class="open-hours__link" data-behavior="open-hours-add">add</a></td>
+                    <td data-behavior="open-hours-blocks" data-day="<%= day %>">
+                      <% if open_hours.empty? %>
+                        <div class="open-hours-block" data-behavior="open-hours-block">
+                          <span class="open-hours-block__closed open-hours-block__closed--left"
+                                data-behavior="open-hours-closed">Closed</span>
+                        </div>
+                      <% else %>
+                        <% open_hours.each do |block| %>
+                          <div class="open-hours-block"
+                               data-behavior="open-hours-block"
+                               data-id="<%= block.id %>">
+                            <select class="open-hours__select"
+                                    data-behavior="open-hours-time-open"
+                                    data-value="<%= block.open&.strftime("%H:%M") %>"></select>
+                            <select class="open-hours__select"
+                                    data-behavior="open-hours-time-close"
+                                    data-value="<%= block.close&.strftime("%H:%M") %>"></select>
+                            <i class="fa fa-trash open-hours-block__delete"
+                               aria-hidden="true"
+                               data-behavior="open-hours-delete"></i>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="open-hours"
+               data-behavior="open-hours-special"
+               data-url="<%= open_hours_special_days_path %>"
+               data-room-id="<%= @room.id %>">
+
+            <h4 class="open-hours__title">
+              Special days
+              <span class="open-hours__link open-hours__link--right" data-behavior="open-hours-new">
+                new
+              </span>
+            </h4>
+            <table class="open-hours__table">
+              <tbody data-behavior="open-hours-days">
+                <% @room.open_hours_by_special_day.each do |day, open_hours| %>
+                  <tr data-behavior="open-hours-day">
+                    <td>
+                      <div class="open-hours-day">
+                        <select class="open-hours__select"
+                                data-behavior="open-hours-date-month"
+                                data-value="<%= day[:month] %>") %>"></select>
+                        <select class="open-hours__select"
+                                data-behavior="open-hours-date-day"
+                                data-value="<%= day[:day] %>") %>"></select>
+                      </div>
+                    </td>
+                    <td><span class="open-hours__link" data-behavior="open-hours-add">add</a></td>
+                    <td data-behavior="open-hours-blocks">
+                      <% open_hours.each do |block| %>
+                        <div class="open-hours-block"
+                             data-behavior="open-hours-block"
+                             data-id="<%= block.id %>">
+
+                          <% if block.closed? %>
+                            <span class="open-hours-block__closed"
+                                  data-behavior="open-hours-closed">Closed</span>
+                          <% else %>
+                            <select class="open-hours__select"
+                                    data-behavior="open-hours-time-open"
+                                    data-value="<%= block.open&.strftime("%H:%M") %>"></select>
+                            <select class="open-hours__select"
+                                    data-behavior="open-hours-time-close"
+                                    data-value="<%= block.close&.strftime("%H:%M") %>"></select>
+                          <% end %>
+
+                          <i class="fa fa-trash open-hours-block__delete"
+                             aria-hidden="true"
+                             data-behavior="open-hours-delete"></i>
+                        </div>
+                      <% end %>
+
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

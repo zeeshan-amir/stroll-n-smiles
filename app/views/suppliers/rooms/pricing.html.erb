@@ -1,0 +1,38 @@
+<%= render "shared/suppliers_navbar" %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'room_menu' %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">Pricing</div>
+
+      <div class="panel-body">
+        <div class="container">
+          <%= form_for @room do |f| %>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <%= f.label :price %>
+                <%= f.number_field :price, class: "form-control", required: true, step: 0.1 %>
+              </div>
+              <div class="col-md-6 form-group">
+                <%= f.label :payment_methods %>
+                <%= f.select :payment_methods, Room::ACCEPTED_PAYMENT_METHODS,
+                  { class: "form-control", include_hidden: false }, { multiple: true, size: 5 } %>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <%= f.submit "Save", class: "btn btn-form" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

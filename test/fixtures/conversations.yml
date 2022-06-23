@@ -1,0 +1,15 @@
+i_am_your_father:
+  sender: anakin
+  recipient: luke
+
+i_know:
+  sender: han
+  recipient: leia
+
+do_or_do_not:
+  sender: yoda
+  recipient: luke
+
+you_want_the_impossible:
+  sender: luke
+  recipient: yoda

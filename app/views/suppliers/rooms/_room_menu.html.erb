@@ -1,0 +1,47 @@
+<ul class="sidebar-list">
+  <li class="sidebar-item">
+    <%= link_to "Description", description_suppliers_room_path, class: "sidebar-link active" %>
+    <span class="pull-right text-babu"><i class="fa fa-check"></i></span>
+  </li>
+  <li class="sidebar-item">
+    <%= link_to "Services", amenities_suppliers_room_path, class: "sidebar-link active" %>
+    <span class="pull-right text-babu"><i class="fa fa-check"></i></span>
+  </li>
+  <li class="sidebar-item">
+    <%= link_to "Pricing", pricing_suppliers_room_path, class: "sidebar-link active" %>
+    <span class="pull-right text-babu"><i class="fa fa-check"></i></span>
+  </li>
+  <li class="sidebar-item">
+    <%= link_to "Location", location_suppliers_room_path, class: "sidebar-link active" %>
+    <span class="pull-right text-babu"><i class="fa fa-check"></i></span>
+  </li>
+  <li class="sidebar-item">
+    <%= link_to "Open Hours", open_hours_suppliers_room_path, class: "sidebar-link active" %>
+
+    <span id="open_hours_check" class="pull-right text-babu"
+          style="display: <%= @room.open_hours_week_days.empty? ? 'none' : 'initial' %>">
+      <i class="fa fa-check"></i>
+    </span>
+  </li>
+  <li class="sidebar-item">
+    <%= link_to "Photos", photo_upload_suppliers_room_path, class: "sidebar-link active" %>
+
+    <% unless @room.photos.empty? %>
+      <span id="photo_check" class="pull-right text-babu"><i class="fa fa-check"></i></span>
+    <% end %>
+  </li>
+</ul>
+
+<% if @room.approved? %>
+  <%= form_for @room, url: suppliers_room_path do |f| %>
+    <%= f.hidden_field :active, value: !@room.active? %>
+    <%= f.submit "#{@room.active? ? 'Unpublish' : 'Publish' }",
+                 id: "publish_button", class: "btn btn-normal btn-block", disabled: !@room.ready? %>
+  <% end %>
+  <div class="room__not-ready-text" id="not-ready-text" style="display: <%= @room.ready? ? "none" : "intial" %>;">
+    * Please complete all sections to be able to publish your clinic.
+  </div>
+<% else %>
+  <div class="room__approval-text">Waiting for approval</div>
+<% end %>
+

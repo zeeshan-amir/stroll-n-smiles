@@ -1,0 +1,50 @@
+<%= render "shared/suppliers_navbar" %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'room_menu' %>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">Description</div>
+
+      <div class="panel-body">
+        <div class="container">
+
+          <%= form_for @room do |f| %>
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control", required: true,
+                    placeholder: "What is your clinic name?" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <%= f.label :name %>
+                <%= f.text_area :summary, rows: 5, class: "form-control", required: true,
+                    placeholder: "Describe your clinic, add any information you will like to share with your clients." %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <%= f.label :open_hours %>
+                <%= f.text_area :open_hours, class: "form-control", rows: 5,
+                    placeholder: "Provide your working hours, including open/close days." %>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <%= f.submit "Save", class: "btn btn-form" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

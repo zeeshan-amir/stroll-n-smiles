@@ -1,0 +1,50 @@
+garbage_compactor:
+  name: "Garbage Compactor"
+  address: "Unit 32-6-3827, Detenion Level, DS-1 Orbital Battle Station"
+  summary: "Metal chamber used to store and compress waste."
+  has_lobby: false
+  has_xrays: false
+  has_heating: false
+  has_internet: false
+  price: 0
+  practitioners: 4
+  stations: 1
+  open_hours: "24/7"
+  active: true
+  payment_methods:
+    - "Cash"
+  user: palpatine
+
+first_jedi_temple:
+  name: "First Jedi Temple"
+  address: "Ahch-To, Unknown regions"
+  summary: "Ancient building established by the Jedi Order."
+  has_lobby: true
+  has_xrays: false
+  has_heating: false
+  has_internet: false
+  price: 0
+  practitioners: 1
+  stations: 1
+  open_hours: "24/7"
+  active: true
+  payment_methods:
+    - "Cash"
+  user: luke
+
+cantina:
+  name: "Chalmun's Spaceport Cantina"
+  address: "Mos Eisley, Tatooine"
+  summary: "Drinking and dining establishment."
+  has_lobby: true
+  has_xrays: false
+  has_heating: false
+  has_internet: true
+  price: 0
+  practitioners: 2
+  stations: 24
+  open_hours: "24/7"
+  active: false
+  payment_methods:
+    - "Cash"
+  user: han

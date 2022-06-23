@@ -1,0 +1,10 @@
+<p>Welcome <%= @email %>!</p>
+
+<p>Your admin account has been created with the following credentials:</p>
+<p>
+  Username: <b><%= @email %></b><br />
+  Password: <b><%= @password %></b><br />
+</p>
+
+<p>Please <%= link_to 'login', panel_login_url %> to change your password.</p>
+

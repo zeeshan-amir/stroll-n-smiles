@@ -1,0 +1,29 @@
+# Don't include local development files here (e.g. *.swp, *.bak, OS files),
+# those belong in a global .gitignore (for more information go to
+# https://help.github.com/articles/ignoring-files).
+
+# environment env variables
+/config/local_env.yml
+
+# bundler configuration
+/.bundle
+/vendor/bundle
+
+# logs and temporary files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# debug files
+.byebug_history
+/yarn-error.log
+
+# node files
+/node_modules
+
+# spring pid file
+/spring/*.pid
+
+# uploaded images in development (local) environment
+/storage

@@ -1,0 +1,94 @@
+<section class="pricing-table">
+  <div class="container">
+    <div class="block-heading">
+      <h2>Dental marketing that is right for you</h2>
+      <p>From high-quality dentals and highly-qualified dentists, we handle your dental marketing and generate more bookings from international travelers, to facilitate access to affordable, outstanding dental care in Ecuador.</p>
+    </div>
+      <div class="col-md-5 col-lg-4">
+        <div class="item">
+          <div class="heading">
+            <h3><%= @plans[0].name.upcase %></h3>
+          </div>
+          <div class="features">
+            <h4><span class="feature">One Dental Listing</span></h4>
+            <h4><span class="feature">Booking Tools</span></h4>
+            <h4><span class="feature">Messaging System</span></h4>
+          </div>
+          <div class="price">
+            <h4 class="m-0"><%= number_to_currency(@plans[0].price_monthly, precision: 0) %></h4>
+            <h4 class="a-0" style="display: none"><%= number_to_currency(@plans[0].price_annual, precision: 0) %></h4>
+          </div>
+          <p class="m-0">Billed monthly</p>
+          <p class="a-0" style="display: none">Billed every year</p>
+          <%= link_to new_subscription_path(plan: @plans[0].id), class: "soft-link", remote: true do %>
+            <button class="btn btn-block btn-form">GET BASIC NOW</button>
+          <% end %>
+          <p class="m-0 toggle-link" data-from="m-0" data-to="a-0">Switch to Annual Billing</p>
+          <p class="a-0 toggle-link" data-from="a-0" data-to="m-0" style="display: none">Switch to Monthly Billing</p>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-lg-4">
+        <div class="item">
+          <div class="heading">
+            <h3><%= @plans[1].name.upcase %></h3>
+          </div>
+          <div class="features">
+            <h4><span class="feature">One Dental Listing</span></h4>
+            <h4><span class="feature">Booking Tools</span></h4>
+            <h4><span class="feature">Messaging System</span></h4>
+            <h4><span class="feature">Priority Search Results</span></h4>
+            <h4><span class="feature">Email Marketing Reach</span></h4>
+            <h4><span class="feature">Social Media Reach</span></h4>
+            <h4><span class="feature">VIP Service & Support</span></h4>
+          </div>
+          <div class="price">
+            <h4 class="m-1"><%= number_to_currency(@plans[1].price_monthly, precision: 0) %></h4>
+            <h4 class="a-1" style="display: none"><%= number_to_currency(@plans[1].price_annual, precision: 0) %></h4>
+          </div>
+          <p class="m-1">Billed monthly</p>
+          <p class="a-1" style="display: none">Billed every year</p>
+          <%= link_to new_subscription_path(plan: @plans[1].id), class: "soft-link", remote: true do %>
+            <button class="btn btn-block btn-form">GET PRO NOW</button>
+          <% end %>
+          <p class="m-1 toggle-link" data-from="m-1" data-to="a-1">Switch to Annual Billing</p>
+          <p class="a-1 toggle-link" data-from="a-1" data-to="m-1" style="display: none">Switch to Monthly Billing</p>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-lg-4">
+        <div class="item">
+          <div class="heading">
+            <h3><%= @plans[2].name.upcase %></h3>
+          </div>
+          <div class="features">
+            <h4><span class="feature">Premium Features</span></h4>
+            <h4><span class="feature">Booking Concierge</span></h4>
+            <h4><span class="feature">Custom Marketing Campaigns</span></h4>
+            <h4><span class="feature">Custom Content Campaigns</span></h4>
+          </div>
+          <p class="m-2">Contact Us</p>
+          <p class="a-2" style="display: none">Contact Us</p>
+          <%= link_to new_subscription_path(plan: @plans[2].id), class: "soft-link", remote: true do %>
+            <button class="btn btn-block btn-form">GET CUSTOM NOW</button>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="subscription-modal" tabindex="-1" role="dialog" class="modal fade"></div>
+
+<script>
+  $(document).ready(function() {
+    $('.toggle-link').on('click', function() {
+      var from = $(this).attr('data-from');
+      var to   = $(this).attr('data-to');
+
+      $('.' + from).css('display', 'none');
+      $('.' + to).css('display', 'block');
+    });
+  });
+</script>

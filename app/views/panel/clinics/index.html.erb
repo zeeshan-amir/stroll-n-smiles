@@ -1,0 +1,146 @@
+<% provide(:title, "#{@user.fullname} clinics") %>
+
+<% @user.rooms.each do |room| %>
+  <div class="row admin-row">
+    <div class="col-md-2">
+      <p><%= image_tag room.cover_photo(:thumb) %></p>
+      <p class="toggle-link" id="approved" data-id="<%= room.id %>" data-value="<%= !room.approved? %>">
+        <%= status_icon_for(room.approved?) %>
+        <span class="admin-text-box">approved</span>
+      </p>
+      <p class="toggle-link" id="featured" data-id="<%= room.id %>" data-value="<%= !room.featured? %>">
+        <%= status_icon_for(room.featured?) %>
+        <span class="admin-text-box">featured</span>
+      </p>
+    </div>
+
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="admin-label">Name</div>
+          <div class="admin-text"><%= room.name %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Address</div>
+          <div class="admin-text"><%= room.address %></div>
+        </div>
+        <div class="col-md-6">
+          <div class="admin-label">Summary</div>
+          <div class="admin-text"><%= room.summary %></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><hr /></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="admin-label">Services</div>
+          <div class="admin-text">
+            <%= content_tag(:div, "Lobby") if room.has_lobby? %>
+            <%= content_tag(:div, "X-Rays") if room.has_xrays? %>
+            <%= content_tag(:div, "Heating") if room.has_heating? %>
+            <%= content_tag(:div, "Internet") if room.has_internet? %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Available Procedures</div>
+          <div class="admin-text"><%= simple_format room.available_procedures %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Open Hours</div>
+          <div class="admin-text"><%= room.open_hours %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Payment Methods</div>
+          <div class="admin-text"><%= simple_format room.payment_methods.join("\n") %></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><hr /></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="admin-label">Search priority</div>
+          <div class="admin-text">
+            <%= number_field_tag "priority-#{room.id}", room.search_priority,
+                "data-id": room.id, class: "admin-small-input", disabled: true %>
+            <%= button_tag "data-id": room.id, class: "admin-small-btn edit-priority" do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+            <%= button_tag "data-id": room.id, class: "admin-small-btn btn-success update-priority" do %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Practitioners</div>
+          <div class="admin-text"><%= room.practitioners %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Stations</div>
+          <div class="admin-text"><%= room.stations %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Price</div>
+          <div class="admin-text"><%= number_to_currency(room.price) %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+
+    $('.edit-priority').on('click', function() {
+      $('#priority-' + $(this).attr('data-id')).prop('disabled', (_, val) => !val);
+    });
+
+    $('.update-priority').on('click', function() {
+      var room_id = $(this).attr('data-id');
+      var values = {}
+
+      values['clinic[search_priority]'] = $('#priority-' + room_id).val();
+
+      $.ajax({
+        type: "PUT",
+        url: "/panel/clinics/" + room_id,
+        data: values,
+        success: function(json) {
+          if(json.error) {
+            console.log(json.error);
+            location.reload();
+          } else {
+            $('#priority-' + room_id).prop('disabled', true);
+            console.log("Success");
+          }
+        }
+      });
+    });
+
+    $('.toggle-link').on('click', function() {
+      var values = {}
+      var element = $(this);
+
+      values['clinic[' + element.attr("id") + ']'] = element.attr('data-value');
+
+      $.ajax({
+        type: "PUT",
+        url: "/panel/clinics/" + element.attr('data-id'),
+        data: values,
+        success: function(json) {
+          if(json.error) {
+            console.log(json.error);
+          } else {
+            element.children().first().toggleClass('fa-check-circle-o');
+            element.children().first().toggleClass('fa-times-circle-o');
+          }
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      reservation: "Bookings"
+      room: "Clinic"
+    attributes:
+      reservation:
+        datetime: "Date and time"
+      room:
+        price: "Appointment price"
+        has_lobby: "Lobby"
+        has_xrays: "X-rays"
+        has_heating: "Heating"
+        has_internet: "Internet"

@@ -1,0 +1,105 @@
+<div id="main">
+  <div id="left">
+    <!-- SEARCH PANEL -->
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <button class="btn btn-default" data-behavior="search-filter-button">
+          More filters <i class="fa fa-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <br/>
+      <div data-behavior="search-form-box" style="display: none;">
+        <%= search_form_for @search.query, url: search_path, remote: true do |f| %>
+          <%= hidden_field_tag :location, @search.location  %>
+
+          <div class="row">
+            <div class="col-md-8">
+              <label>Price range:</label>
+              <div data-behavior="search-price-slider"></div>
+            </div>
+            <div class="col-md-2">
+              <label>Min Price:</label>
+              <%= f.text_field :price_gteq, class: "form-control", value: @search.minimum_price,
+                               "data-behavior": "search-min-price", "data-limit": @search.minimum_price %>
+            </div>
+            <div class="col-md-2">
+              <label>Max Price:</label>
+              <%= f.text_field :price_lteq, class: "form-control", value: @search.maximum_price,
+                               "data-behavior": "search-max-price", "data-limit": @search.maximum_price %>
+            </div>
+          </div>
+          <hr/>
+
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.label :date %>
+              <%= text_field_tag :date, @search.date, readonly: true, placeholder: "Pick date",
+                                 class: "form-control", "data-behavior": "datepicker" %>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= f.label :stations %>
+                <%= f.number_field :stations_gteq, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= f.label :practitioners %>
+                <%= f.number_field :practitioners_gteq, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <hr/>
+
+          <div class="row">
+            <div class="col-md-3">
+              <%= check_box_tag "q[has_lobby_eq]", true %>
+              <%= Room.human_attribute_name(:has_lobby) %>
+            </div>
+            <div class="col-md-3">
+              <%= check_box_tag "q[has_heating_eq]", true %>
+              <%= Room.human_attribute_name(:has_heating) %>
+            </div>
+            <div class="col-md-3">
+              <%= check_box_tag "q[has_xrays_eq]", true %>
+              <%= Room.human_attribute_name(:has_xrays) %>
+            </div>
+            <div class="col-md-3">
+              <%= check_box_tag "q[has_internet_eq]", true %>
+              <%= Room.human_attribute_name(:has_internet) %>
+            </div>
+          </div>
+          <hr/>
+
+          <div class="row text-center">
+            <%= f.submit "Search", class: "btn btn-form" %>
+          </div>
+        <% end %>
+      </div>
+
+      <br/>
+
+      <div class="row" id="room_listing">
+        <% if @search.empty? %>
+          <div class="no-clinics">No clinics found for the selected location.</div>
+        <% else %>
+          <%= render "shared/rooms_list", rooms: @search.rooms %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="right">
+    <div style="width: 100%; height: 100%" data-behavior="map"></div>
+  </div>
+</div>
+
+<script>
+  google.maps.event.addDomListener(window, 'load', function() {
+    initializeMap(<%= raw @search.rooms.to_json %>, "<%= @search.location %>");
+  });
+</script>

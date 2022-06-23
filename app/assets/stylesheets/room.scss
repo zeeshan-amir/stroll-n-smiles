@@ -1,0 +1,28 @@
+.room {}
+
+.room__no-availability {
+  color: #cc0000;
+  text-align: center;
+}
+
+.room__book-button {
+  @extend .btn;
+  @extend .btn-normal;
+  @extend .btn-block;
+
+  margin-top: 10px;
+}
+
+.room__approval-text {
+  margin-top: 25px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #dd6666;
+}
+
+.room__not-ready-text {
+  margin-top: 10px;
+  color: #dd6666;
+}

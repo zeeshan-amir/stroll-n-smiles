@@ -1,0 +1,29 @@
+early_meditation:
+  open: "08:00"
+  close: "14:00"
+  week_day: 7
+  room: first_jedi_temple
+
+late_meditation:
+  open: "15:00"
+  close: "20:00"
+  week_day: 7
+  room: first_jedi_temple
+
+midweek_meditation:
+  open: "09:00"
+  close: "17:00"
+  week_day: 3
+  room: first_jedi_temple
+
+morning_shift:
+  open: "07:00"
+  close: "13:00"
+  week_day: 3
+  room: garbage_compactor
+
+evening_shift:
+  open: "07:00"
+  close: "13:00"
+  week_day: 4
+  room: garbage_compactor

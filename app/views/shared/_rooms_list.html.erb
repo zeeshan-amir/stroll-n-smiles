@@ -1,0 +1,31 @@
+<% rooms.each do |room| %>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading preview">
+        <%= image_tag room.cover_photo(:medium) %>
+      </div>
+      <div class="panel-body search-result-box">
+        <%= link_to room.name, room_path(room, date: defined?(date) ? date : nil) %><br/>
+        $<%= room.price %>
+        <div id="star_<%= room.id %>"></div> <%= pluralize(room.guest_reviews.count, "review") %>
+
+        <% if action_name == "search" %>
+          <hr>
+          <div>Open Hours</div>
+          <span class="bottom-text"><%= room.open_hours %></span>
+          <hr>
+          <div>Availability on <b><%= @search.date %></b></div>
+          <span class="bottom-text"><%= room.availability_on(@search.date).join(", ") %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#star_<%= room.id %>').raty({
+      path: '/images',
+      readOnly: true,
+      score: <%= room.average_rating %>
+    });
+  </script>
+<% end %>

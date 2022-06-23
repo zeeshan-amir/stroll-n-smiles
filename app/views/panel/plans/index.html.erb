@@ -1,0 +1,47 @@
+<% provide(:title, "Pricing Plans") %>
+
+<div id="messages">
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message.html_safe %></div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% @plans.each do |plan| %>
+      <div class="row admin-row">
+        <div class="col-md-2">
+          <div class="admin-label">Name</div>
+          <span class="admin-text"><%= plan.name %></span>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Montly Price</div>
+          <div class="admin-text"><%= number_to_currency(plan.price_monthly, precision: 0) %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Semiannual Price</div>
+          <div class="admin-text"><%= number_to_currency(plan.price_semiannual, precision: 0) %></div>
+        </div>
+        <div class="col-md-3">
+          <div class="admin-label">Annual Price</div>
+          <div class="admin-text"><%= number_to_currency(plan.price_annual, precision: 0) %></div>
+        </div>
+        <div class="col-md-1">
+          <%= link_to edit_panel_plan_path(plan), class: "pull-right", remote: true do %>
+            <i class="fa fa-pencil admin-text-box"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="new-admin-modal" tabindex="-1" role="dialog" class="modal fade"></div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    setTimeout(function() {
+      $('#messages').animate({ height: 0, opacity: 0 }, 'slow');
+    }, 3500);
+  });
+</script>
