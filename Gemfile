@@ -21,6 +21,7 @@ gem "jquery-ui-rails", "~> 5.0"
 gem "mini_magick"
 gem "minitest", "~> 5.10"
 gem "momentjs-rails", "~> 2.17"
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem "omniauth", "~> 1.6"
 gem "omniauth-facebook", "~> 4.0"
 gem "pg", "~> 0.20"
